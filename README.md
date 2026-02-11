@@ -1,27 +1,27 @@
-# LICHI — Виртуализированный каталог товаров
+# LICHI — Virtualized Product Catalog
 
-Каталог одежды с бесконечной прокруткой и виртуализацией, подключённый к реальному API [Lichi](https://lichi.com).
+Clothing catalog with infinite scroll and DOM virtualization, connected to the real [Lichi](https://lichi.com) API.
 
-## Особенности
+## Features
 
-- **Постраничная загрузка** — товары загружаются порциями по 12 штук через `useSWRInfinite`, а не все сразу
-- **Виртуализация DOM** — только видимые карточки существуют в DOM благодаря `react-window` (FixedSizeGrid)
-- **Адаптивная сетка** — от 1 до 4 колонок в зависимости от ширины экрана через `AutoSizer`
-- **Бесконечный скролл** — при достижении конца автоматически подгружаются следующие 6 страниц
-- **Реальное API** — данные с фото, ценами и размерами приходят из `api.lichi.com`
+- **Paginated fetching** — products load in batches of 12 via `useSWRInfinite`, not all at once
+- **DOM virtualization** — only visible cards exist in the DOM thanks to `react-window` (FixedSizeGrid)
+- **Responsive grid** — 1 to 4 columns depending on screen width via `AutoSizer`
+- **Infinite scroll** — automatically fetches the next 6 pages when reaching the bottom
+- **Real API** — product data with photos, prices, and sizes comes from `api.lichi.com`
 
-## Как работает ленивая загрузка
+## How Lazy Loading Works
 
-1. При открытии загружаются первые 4 страницы (48 товаров)
-2. `FixedSizeGrid` рендерит только видимые ячейки — остальные не в DOM
-3. Когда пользователь доскроллит до конца, `setSize(size + 6)` запрашивает ещё 72 товара
-4. Уже загруженные данные кешируются через SWR
+1. First 4 pages (48 products) load on mount
+2. `FixedSizeGrid` renders only visible cells — the rest are not in the DOM
+3. When the user scrolls to the end, `setSize(size + 6)` requests 72 more products
+4. Previously loaded data is cached by SWR
 
-## Стек
+## Tech Stack
 
 - **Next.js 13** (App Router)
 - **TypeScript**
-- **SWR Infinite** — пагинация и кеширование запросов
-- **react-window** — виртуализация списка
-- **react-virtualized-auto-sizer** — адаптивный размер контейнера
+- **SWR Infinite** — pagination and request caching
+- **react-window** — list virtualization
+- **react-virtualized-auto-sizer** — responsive container sizing
 - **Tailwind CSS**
